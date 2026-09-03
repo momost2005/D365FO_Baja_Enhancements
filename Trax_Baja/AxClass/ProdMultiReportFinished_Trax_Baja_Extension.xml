@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>ProdMultiReportFinished_Trax_Baja_Extension</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+/// <summary>
+/// This class is an extension class for the logic behind "Report as finished" in the production orders program
+/// </summary>
+[ExtensionOf(classStr(ProdMultiReportFinished))]
+final class ProdMultiReportFinished_Trax_Baja_Extension
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>reportFinishedProductionOrder</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Performs reports a single production order as finished.
+    /// </summary>
+    /// <param name = "_prodParmReportFinished">Report as finished parameters.</param>
+    protected void reportFinishedProductionOrder(ProdParmReportFinished _prodParmReportFinished)
+    {
+        int     infologStartLine;
+        str     errorText;
+
+        next reportFinishedProductionOrder(_prodParmReportFinished);
+
+        try
+        {
+            infologStartLine = infologLine();
+            if(_prodParmReportFinished.InventDimId)
+            {
+                InventDim inventDim = InventDim::find(_prodParmReportFinished.InventDimId);
+                if(inventDim.inventBatchId)
+                {
+                    InventBatch inventBatch = InventBatch::find(inventDim.inventBatchId,_prodParmReportFinished.ItemId);
+                    if(inventBatch)
+                    {
+                        ttsbegin;
+                        inventBatch.selectForUpdate(true);
+                        inventBatch.ReleaseDateTime = DateTimeUtil::getSystemDateTime();
+                        inventBatch.doUpdate();
+                        ttscommit;
+                    }
+                }
+            }
+        }
+        catch (Exception::CLRError)
+        {
+            System.Exception exception = CLRInterop::getLastException();
+            errorText = exception.ToString();
+            throw error(errorText);
+        }
+        catch
+        {
+            errorText = RetailUtilities::getAndClearInfologMessages(infologStartLine);
+            throw error(errorText);
+        }
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

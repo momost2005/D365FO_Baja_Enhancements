@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Diagnostics
+  GenerationTime="2026-08-27T18:05:35.8965724+03:00">
+  <Items>
+    <Diagnostic>
+      <DiagnosticType>VisualStudioIntegration</DiagnosticType>
+      <Severity>Informational</Severity>
+      <Path>D:\UnifiedDevEnv_LocalInstallation\AOSService\PackagesLocalDirectory\Bin\labelc.exe</Path>
+      <Moniker>D:\UnifiedDevEnv_LocalInstallation\AOSService\PackagesLocalDirectory\Bin\labelc.exe -metadata="C:\ASamplePath" -output="C:\Users\ThinkPad\AppData\Local\Microsoft\Dynamics365\RuntimeSymLinks\xppconfig_8725f\ZZZZ__ASamplePath\Trax_Baja\Resources" -modelmodule="Trax_Baja" </Moniker>
+      <Message>D:\UnifiedDevEnv_LocalInstallation\AOSService\PackagesLocalDirectory\Bin\labelc.exe -metadata="C:\ASamplePath" -output="C:\Users\ThinkPad\AppData\Local\Microsoft\Dynamics365\RuntimeSymLinks\xppconfig_8725f\ZZZZ__ASamplePath\Trax_Baja\Resources" -modelmodule="Trax_Baja" </Message>
+    </Diagnostic>
+    <Diagnostic>
+      <DiagnosticType>Unspecified</DiagnosticType>
+      <Severity>Informational</Severity>
+      <Path>labelc.exe</Path>
+      <Moniker>Starting label compilation...</Moniker>
+      <Message>Starting label compilation...</Message>
+    </Diagnostic>
+    <Diagnostic>
+      <DiagnosticType>Unspecified</DiagnosticType>
+      <Severity>Informational</Severity>
+      <Path>labelc.exe</Path>
+      <Moniker>- Module name    </Moniker>
+      <Message>Trax_Baja</Message>
+    </Diagnostic>
+    <Diagnostic>
+      <DiagnosticType>Unspecified</DiagnosticType>
+      <Severity>Informational</Severity>
+      <Path>labelc.exe</Path>
+      <Moniker>- Metadata path  </Moniker>
+      <Message>C:\ASamplePath\</Message>
+    </Diagnostic>
+    <Diagnostic>
+      <DiagnosticType>Unspecified</DiagnosticType>
+      <Severity>Informational</Severity>
+      <Path>labelc.exe</Path>
+      <Moniker>- Output path    </Moniker>
+      <Message>C:\Users\ThinkPad\AppData\Local\Microsoft\Dynamics365\RuntimeSymLinks\xppconfig_8725f\ZZZZ__ASamplePath\Trax_Baja\Resources\</Message>
+    </Diagnostic>
+    <Diagnostic>
+      <DiagnosticType>Unspecified</DiagnosticType>
+      <Severity>Informational</Severity>
+      <Path>labelc.exe</Path>
+      <Moniker>- Maximum DoP    </Moniker>
+      <Message>0 (Logical Processors: 8)</Message>
+    </Diagnostic>
+    <Diagnostic>
+      <DiagnosticType>Unspecified</DiagnosticType>
+      <Severity>Informational</Severity>
+      <Path>labelc.exe</Path>
+      <Moniker>Generating Primary resource assembly for Trax_BajaLabel</Moniker>
+      <Message>Generating Primary resource assembly for Trax_BajaLabel</Message>
+    </Diagnostic>
+    <Diagnostic>
+      <DiagnosticType>Unspecified</DiagnosticType>
+      <Severity>Informational</Severity>
+      <Path>labelc.exe</Path>
+      <Moniker>Generating satellite resource assembly for label file Trax_BajaLabel, language ar-SA</Moniker>
+      <Message>Generating satellite resource assembly for label file Trax_BajaLabel, language ar-SA</Message>
+    </Diagnostic>
+    <Diagnostic>
+      <DiagnosticType>Unspecified</DiagnosticType>
+      <Severity>Informational</Severity>
+      <Path>labelc.exe</Path>
+      <Moniker>Generating satellite resource assembly for label file Trax_BajaLabel, language en-US</Moniker>
+      <Message>Generating satellite resource assembly for label file Trax_BajaLabel, language en-US</Message>
+    </Diagnostic>
+    <Diagnostic>
+      <DiagnosticType>Unspecified</DiagnosticType>
+      <Severity>Informational</Severity>
+      <Path>labelc.exe</Path>
+      <Moniker>Done compiling 2 label files!</Moniker>
+      <Message>Done compiling 2 label files!</Message>
+    </Diagnostic>
+    <Diagnostic>
+      <DiagnosticType>Unspecified</DiagnosticType>
+      <Severity>Informational</Severity>
+      <Path>labelc.exe</Path>
+      <Moniker>Model store query time 00:00:00.4387904.</Moniker>
+      <Message>Model store query time 00:00:00.4387904.</Message>
+    </Diagnostic>
+    <Diagnostic>
+      <DiagnosticType>Unspecified</DiagnosticType>
+      <Severity>Informational</Severity>
+      <Path>labelc.exe</Path>
+      <Moniker>Label compilation time 00:00:00.1513850.</Moniker>
+      <Message>Label compilation time 00:00:00.1513850.</Message>
+    </Diagnostic>
+    <Diagnostic>
+      <DiagnosticType>Unspecified</DiagnosticType>
+      <Severity>Informational</Severity>
+      <Path>labelc.exe</Path>
+      <Moniker>Completed label compilation in 1 seconds with exit code 0.</Moniker>
+      <Message>Completed label compilation in 1 seconds with exit code 0.</Message>
+    </Diagnostic>
+  </Items>
+  <Aliases />
+</Diagnostics>

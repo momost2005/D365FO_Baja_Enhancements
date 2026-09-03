@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxLabelFile xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>Trax_BajaLabel_ar-SA</Name>
+	<LabelContentFileName>Trax_BajaLabel.ar-SA.label.txt</LabelContentFileName>
+	<LabelFileId>Trax_BajaLabel</LabelFileId>
+	<Language>ar-SA</Language>
+	<RelativeUriInModelStore>Trax_Baja\Trax_Baja\AxLabelFile\LabelResources\ar-SA\Trax_BajaLabel.ar-SA.label.txt</RelativeUriInModelStore>
+</AxLabelFile>

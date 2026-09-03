@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxSecurityRole xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>TxBaja_PeriodicQualityGroup</Name>
+	<Description>@Trax_BajaLabel:TxBaja_0005</Description>
+	<Label>@Trax_BajaLabel:TxBaja_0005</Label>
+	<DirectAccessPermissions />
+	<Duties />
+	<Privileges>
+		<AxSecurityPrivilegeReference>
+			<Name>TxBaja_PeriodicQualityGroup</Name>
+		</AxSecurityPrivilegeReference>
+	</Privileges>
+	<SubRoles />
+</AxSecurityRole>

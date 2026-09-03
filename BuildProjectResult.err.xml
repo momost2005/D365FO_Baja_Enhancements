@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Diagnostics
+  GenerationTime="2026-08-26T13:49:37.2978655+03:00">
+  <Items>
+    <Diagnostic>
+      <DiagnosticType>Metadata</DiagnosticType>
+      <Severity>Error</Severity>
+      <Path>AxForm/TxBaja_PeriodicQualityGroup/Design/Controls/FormGroupControl1/Pattern</Path>
+      <Moniker>PatternEmptyButRequired</Moniker>
+      <Message>Pattern 'Simple List' requires a sub-pattern specified on control 'AxForm/TxBaja_PeriodicQualityGroup/Design/Controls/FormGroupControl1'.</Message>
+    </Diagnostic>
+  </Items>
+  <Aliases />
+</Diagnostics>

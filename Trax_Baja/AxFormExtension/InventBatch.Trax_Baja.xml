@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxFormExtension xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="Microsoft.Dynamics.AX.Metadata.V6">
+	<Name>InventBatch.Trax_Baja</Name>
+	<ControlModifications />
+	<Controls>
+		<AxFormExtensionControl xmlns="">
+			<Name>FormExtensionControlpmg5olh01</Name>
+			<FormControl xmlns=""
+				i:type="AxFormDateTimeControl">
+				<Name>ReleaseDateTime</Name>
+				<AllowEdit>No</AllowEdit>
+				<Type>DateTime</Type>
+				<FormControlExtension
+					i:nil="true" />
+				<DataField>ReleaseDateTime</DataField>
+				<DataSource>InventBatch</DataSource>
+			</FormControl>
+			<Parent>DetailsHeader</Parent>
+		</AxFormExtensionControl>
+		<AxFormExtensionControl xmlns="">
+			<Name>FormExtensionControls0k2pboz1</Name>
+			<FormControl xmlns=""
+				i:type="AxFormDateTimeControl">
+				<Name>InventBatch_ReleaseDateTime</Name>
+				<Type>DateTime</Type>
+				<FormControlExtension
+					i:nil="true" />
+				<DataField>ReleaseDateTime</DataField>
+				<DataSource>InventBatch</DataSource>
+			</FormControl>
+			<Parent>BatchListGrid</Parent>
+		</AxFormExtensionControl>
+	</Controls>
+	<DataSourceModifications />
+	<DataSourceReferences />
+	<DataSources />
+	<Parts />
+	<PropertyModifications />
+</AxFormExtension>
