@@ -1,0 +1,8 @@
+﻿TxBaja_0001=Periodic quality group
+ ;Label file comment - see above label
+TxBaja_0002=Periodic code
+TxBaja_0003=Periodic decription
+TxBaja_0004=Check interval in Hours
+TxBaja_0005=Trax - Periodic quality group
+TxBaja_0006=Apply periodic quality group check
+TxBaja_0007=Batch release date time
