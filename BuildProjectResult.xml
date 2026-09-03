@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Diagnostics
-  GenerationTime="2026-09-03T12:00:55.1904029+03:00">
+  GenerationTime="2026-09-03T15:31:58.1467677+03:00">
   <Items>
+    <Diagnostic>
+      <DiagnosticType>Generation</DiagnosticType>
+      <Severity>Informational</Severity>
+      <Path>dynamics://View/TxBaja_PeriodicQualityGroupEntity</Path>
+      <ElementType>View</ElementType>
+      <Moniker>IsRuntimeServicesMode</Moniker>
+      <Line>0</Line>
+      <Column>0</Column>
+      <Message>Is Runtime Services mode: False</Message>
+    </Diagnostic>
     <Diagnostic>
       <DiagnosticType>ExternalReference</DiagnosticType>
       <Severity>Warning</Severity>

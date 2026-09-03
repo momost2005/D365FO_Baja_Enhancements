@@ -1,13 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Diagnostics
-  GenerationTime="2026-08-27T18:05:34.8613962+03:00">
+  GenerationTime="2026-09-03T15:36:33.4748426+03:00">
   <Items>
+    <Diagnostic>
+      <DiagnosticType>Generation</DiagnosticType>
+      <Severity>Informational</Severity>
+      <Path>dynamics://View/TxBaja_PeriodicQualityGroupEntity</Path>
+      <ElementType>View</ElementType>
+      <Moniker>IsRuntimeServicesMode</Moniker>
+      <Line>0</Line>
+      <Column>0</Column>
+      <Message>Is Runtime Services mode: False</Message>
+    </Diagnostic>
     <Diagnostic>
       <DiagnosticType>ExternalReference</DiagnosticType>
       <Severity>Warning</Severity>
       <Path>dynamics://Reference/System.IO.Compression.ZipFile</Path>
       <Moniker>AssemblyFileNotFound</Moniker>
       <Message>Assembly 'System.IO.Compression.ZipFile, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' failed to load because it was not found.</Message>
+    </Diagnostic>
+    <Diagnostic>
+      <DiagnosticType>TaskListItem</DiagnosticType>
+      <Severity>Informational</Severity>
+      <Path>dynamics://Class/InventQualityOrderTable_Update_Method_Extension/Method/update</Path>
+      <ElementType>Class Method</ElementType>
+      <Moniker>TaskListItem</Moniker>
+      <Line>27</Line>
+      <Column>17</Column>
+      <EndLine>27</EndLine>
+      <EndColumn>93</EndColumn>
+      <Message>TODO: Add your custom code here when quality order status changes to Pass</Message>
     </Diagnostic>
     <Diagnostic>
       <DiagnosticType>ExternalReference</DiagnosticType>

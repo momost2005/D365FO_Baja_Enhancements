@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>InventQualityOrderTable_Update_Method_Extension</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+[ExtensionOf(tableStr(InventQualityOrderTable))]
+final class InventQualityOrderTable_Update_Method_Extension
+{
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>update</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// This method is an extension of the update method in the InventQualityOrderTable table. 
+    /// It checks if the order status has changed to "pass" and performs additional actions if it has.
+    /// </summary>
+    /// <param name = "_dropEstimated"></param>
+    /// <param name = "_updateReservation"></param>
+    public void update( NoYes _dropEstimated , NoYes _updateReservation )
+    {
+        int                     infologStartLine;
+        str                     errorText;
+        InventQualityOrderTable orig = this.orig();
+        InventTestOrderStatus   oldStatus = orig.OrderStatus;
+        InventTestOrderStatus   newStatus = this.OrderStatus;
+
+        next update(_dropEstimated , _updateReservation);
+
+        // Check if the order status changed to "pass"
+        if (oldStatus != newStatus && newStatus == InventTestOrderStatus::Pass)
+        {
+            try
+            {
+                infologStartLine = infologLine();
+                // TODO: Add your custom code here when quality order status changes to Pass
+                InventBatch _inventBatch;
+                InventDim   _inventDim;
+
+                if(this.InventDimId)
+                {
+                    _inventDim  =   InventDim::find(this.InventDimId);
+                    if(_inventDim.InventBatchId)
+                    {
+                        _inventBatch = InventBatch::find(_inventDim.InventBatchId,this.ItemId);
+                        if(_inventBatch && _inventBatch.ReleaseDateTime != utcDateTimeNull())
+                        {
+                            ttsbegin;
+                            _inventBatch.selectForUpdate(true);
+                            _inventBatch.ReleaseDateTime = DateTimeUtil::getSystemDateTime();
+                            _inventBatch.doUpdate();
+                            ttscommit;
+                        }
+                    }                        
+                }                    
+            }
+            catch (Exception::CLRError)
+            {
+                System.Exception exception = CLRInterop::getLastException();
+                errorText = exception.ToString();
+                throw error(errorText);
+            }
+            catch
+            {
+                errorText = RetailUtilities::getAndClearInfologMessages(infologStartLine);
+                throw error(errorText);
+            }                                 
+        }
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

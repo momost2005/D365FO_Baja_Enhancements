@@ -1,3 +1,8 @@
 bin/
 XppMetadata/
 *.log
+Resources/
+BuildProjectResult.err.xml
+BuildProjectResult.xml
+BuildModelResult.xml
+CompileLabels.xml
