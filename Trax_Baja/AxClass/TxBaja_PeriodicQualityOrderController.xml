@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>TxBaja_PeriodicQualityOrderController</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+/// <summary>
+/// SysOperation controller used to run/schedule <c>TxBaja_PeriodicQualityOrderService</c>,
+/// interactively or as a batch job.
+/// </summary>
+public class TxBaja_PeriodicQualityOrderController extends SysOperationServiceController
+{
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>defaultCaption</Name>
+				<Source><![CDATA[
+    /// <summary>
+    ///
+    /// </summary>
+    /// <returns></returns>
+    protected ClassDescription defaultCaption()
+    {
+        ClassDescription ret;
+
+        ret = "@Trax_BajaLabel:TxBaja_0010";
+
+        return ret;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>new</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Initializes the controller with the service class and its entry-point method.
+    /// </summary>
+    public void new()
+    {
+        super(classStr(TxBaja_PeriodicQualityOrderService),
+              methodStr(TxBaja_PeriodicQualityOrderService, createPeriodicQualityOrders),
+              SysOperationExecutionMode::Synchronous);
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>construct</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name = "_executionMode"></param>
+    /// <returns></returns>
+    public static TxBaja_PeriodicQualityOrderController construct(SysOperationExecutionMode _executionMode = SysOperationExecutionMode::Synchronous)
+    {
+        TxBaja_PeriodicQualityOrderController controller;
+        controller = new TxBaja_PeriodicQualityOrderController();
+        controller.parmExecutionMode(_executionMode);
+        return controller;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>main</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Entry point for the menu item / interactive run.
+    /// </summary>
+    /// <param name="_args">The calling arguments.</param>
+    public static void main(Args _args)
+    {
+        TxBaja_PeriodicQualityOrderController controller = TxBaja_PeriodicQualityOrderController::construct();
+        controller.parmArgs(_args);
+
+        controller.parmShowDialog(true);
+        controller.startOperation();
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>canGoBatchJournal</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Indicates whether this operation can be added to a batch job from the client.
+    /// </summary>
+    /// <returns>true.</returns>
+    public boolean canGoBatchJournal()
+    {
+        return true;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>canGoBatch</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Indicates whether this operation can run in a batch job.
+    /// </summary>
+    /// <returns>true.</returns>
+    public boolean canGoBatch()
+    {
+        return true;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

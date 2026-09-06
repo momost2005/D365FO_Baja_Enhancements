@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>TxBaja_InventBatchOnHandPeriodicCheck</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+/// <summary>
+/// Provides static helper methods to determine which invent batches are currently on hand
+/// and are due for the periodic quality check configured for their item.
+/// </summary>
+
+public class TxBaja_InventBatchOnHandPeriodicCheck
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>findBatchesDueForPeriodicCheck</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Retrieves the on-hand invent batches, in the current company, whose periodic quality
+    /// check interval has elapsed.
+    /// </summary>
+    /// <returns>
+    /// A populated <c>TmpTxBaja_PeriodicBatchOnHand</c> buffer containing one row per item /
+    /// batch / inventory dimension combination that qualifies.
+    /// </returns>
+    /// <remarks>
+    /// A batch qualifies when all of the following are true:
+    /// * The InventSum record is open (Closed == No) and its AvailPhysical is greater than zero.
+    /// * The item (InventTable) has a PeriodicCode value assigned.
+    /// * The batch's warehouse (InventLocation) has ApplyPeriodicCheckFlag set to Yes.
+    /// * The number of hours elapsed since InventBatch.ReleaseDateTime is greater than the
+    ///   IntervalHrs configured on the item's periodic quality group (TxBaja_PeriodicQualityGroup).
+    /// The comparison is evaluated against the current system date and time at the moment this
+    /// method is called.
+    /// </remarks>
+    public static TxBaja_TmpPeriodicBatchOnHand findBatchesDueForPeriodicCheck()
+    {
+        TxBaja_TmpPeriodicBatchOnHand   tmpBatchOnHand;
+        InventSum                       inventSum;
+        InventDim                       inventDim;
+        InventTable                     inventTable;
+        InventLocation                  inventLocation;
+        InventBatch                     inventBatch;
+        TxBaja_PeriodicQualityGroup     periodicQualityGroup;
+        utcDateTime                     currentDateTime = DateTimeUtil::utcNow();
+        real                            hoursSinceRelease;
+
+        while select inventSum
+            where inventSum.AvailPhysical > 0 && inventSum.Closed         == NoYes::No
+            join inventDim
+                where inventDim.InventDimId   == inventSum.InventDimId
+                   && inventDim.InventBatchId  != ''
+            join inventTable
+                where inventTable.ItemId       == inventSum.ItemId
+                   && inventTable.PeriodicCode != ''
+            join inventLocation
+                where inventLocation.InventLocationId     == inventDim.InventLocationId
+                   && inventLocation.ApplyPeriodicCheckFlag == NoYes::Yes
+            join inventBatch
+                where inventBatch.ItemId       == inventSum.ItemId
+                   && inventBatch.InventBatchId == inventDim.InventBatchId
+            join periodicQualityGroup
+                where periodicQualityGroup.PeriodicCode == inventTable.PeriodicCode
+        {
+            if (inventBatch.ReleaseDateTime == utcDateTimeNull())
+            {
+                // No release date/time recorded yet for this batch - cannot evaluate the interval.
+                continue;
+            }
+
+            hoursSinceRelease = DateTimeUtil::getDifference(currentDateTime, inventBatch.ReleaseDateTime) / 3600.0;
+
+            if (hoursSinceRelease > periodicQualityGroup.IntervalHrs)
+            {
+                tmpBatchOnHand.clear();
+                tmpBatchOnHand.ItemId            = inventSum.ItemId;
+                tmpBatchOnHand.InventBatchId     = inventDim.InventBatchId;
+                tmpBatchOnHand.InventDimId       = inventSum.InventDimId;
+                tmpBatchOnHand.InventLocationId  = inventDim.InventLocationId;
+                tmpBatchOnHand.AvailPhysical     = inventSum.AvailPhysical;
+                tmpBatchOnHand.PeriodicCode      = inventTable.PeriodicCode;
+                tmpBatchOnHand.ReleaseDateTime   = inventBatch.ReleaseDateTime;
+                tmpBatchOnHand.IntervalHrs       = periodicQualityGroup.IntervalHrs;
+                tmpBatchOnHand.HoursSinceRelease = hoursSinceRelease;
+                tmpBatchOnHand.insert();
+            }
+        }
+
+        return tmpBatchOnHand;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

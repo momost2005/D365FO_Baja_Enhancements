@@ -13,6 +13,15 @@
 				<MenuItemName>TxBaja_PeriodicQualityGroup</MenuItemName>
 			</MenuElement>
 		</AxMenuExtensionElement>
+		<AxMenuExtensionElement xmlns="">
+			<Parent>Scheduling</Parent>
+			<MenuElement xmlns=""
+				i:type="AxMenuElementMenuItem">
+				<Name>TxBaja_CreatePeriodicQualityOrders</Name>
+				<MenuItemName>TxBaja_CreatePeriodicQualityOrders</MenuItemName>
+				<MenuItemType>Action</MenuItemType>
+			</MenuElement>
+		</AxMenuExtensionElement>
 	</Elements>
 	<MenuElementModifications />
 	<PropertyModifications />

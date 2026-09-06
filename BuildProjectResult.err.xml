@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Diagnostics
-  GenerationTime="2026-08-26T13:49:37.2978655+03:00">
+  GenerationTime="2026-09-06T12:44:49.3995009+03:00">
   <Items>
     <Diagnostic>
-      <DiagnosticType>Metadata</DiagnosticType>
+      <DiagnosticType>Compile</DiagnosticType>
       <Severity>Error</Severity>
-      <Path>AxForm/TxBaja_PeriodicQualityGroup/Design/Controls/FormGroupControl1/Pattern</Path>
-      <Moniker>PatternEmptyButRequired</Moniker>
-      <Message>Pattern 'Simple List' requires a sub-pattern specified on control 'AxForm/TxBaja_PeriodicQualityGroup/Design/Controls/FormGroupControl1'.</Message>
+      <Path>dynamics://Table/TmpTxBaja_PeriodicBatchOnHand</Path>
+      <ElementType>Table</ElementType>
+      <Moniker>ClassNotFound</Moniker>
+      <Line>5</Line>
+      <Column>2</Column>
+      <EndLine>5</EndLine>
+      <EndColumn>11</EndColumn>
+      <Message>Class 'Temporary' was not found. Are you missing a module reference?</Message>
     </Diagnostic>
   </Items>
   <Aliases />

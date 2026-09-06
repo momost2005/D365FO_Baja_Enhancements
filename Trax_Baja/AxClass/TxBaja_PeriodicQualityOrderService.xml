@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>TxBaja_PeriodicQualityOrderService</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+/// <summary>
+/// Service class that finds invent batches due for a periodic quality check and creates a
+/// quality order for each one found, optionally limited to specific items and/or item batches.
+/// </summary>
+public class TxBaja_PeriodicQualityOrderService extends SysOperationServiceBase
+{ 
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>createPeriodicQualityOrders</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Entry point invoked by the SysOperation framework (interactively or via a batch job) to
+    /// create periodic quality orders for on-hand batches that are due for a check.
+    /// </summary>
+    /// <param name="_contract">
+    /// The filter contract. When <c>_contract.parmItemIds()</c> and/or
+    /// <c>_contract.parmInventBatchIds()</c> are left empty, all on-hand batches due for a check
+    /// are processed.
+    /// </param>
+    [SysEntryPointAttribute(true)]
+    public void createPeriodicQualityOrders(TxBaja_PeriodicQualityOrderContract _contract)
+    {
+        TxBaja_TmpPeriodicBatchOnHand   tmpBatchOnHand;
+        int                             createdCount;
+        int                             skippedCount;
+
+        tmpBatchOnHand = TxBaja_InventBatchOnHandPeriodicCheck::findBatchesDueForPeriodicCheck();
+
+        while select tmpBatchOnHand
+        {
+            //if (!_contract.itemIdMatches(tmpBatchOnHand.ItemId)
+            // || !_contract.inventBatchIdMatches(tmpBatchOnHand.InventBatchId))
+            //{
+            //    continue;
+            //}
+
+            try
+            {
+                //if(this.doesQualityOrderExistInSpecificStatus(tmpBatchOnHand,InventTestOrderStatus::Open) == false &&
+                //   this.doesQualityOrderExistInSpecificStatus(tmpBatchOnHand,InventTestOrderStatus::Pass) == false )
+                //{
+                    this.createQualityOrder(tmpBatchOnHand);
+                    createdCount++;
+                //}                                  
+            }
+            catch (Exception::Error)
+            {
+                skippedCount++;
+                error(strFmt("@Trax_BajaLabel:TxBaja_0011",
+                    tmpBatchOnHand.ItemId,
+                    tmpBatchOnHand.InventBatchId,
+                    RetailUtilities::getAndClearInfologMessages(infologLine())));
+            }
+        }
+
+        info(strFmt("@Trax_BajaLabel:TxBaja_0012", createdCount, skippedCount));
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>createQualityOrder</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Creates a single quality order for the specified on-hand batch.
+    /// </summary>
+    /// <param name="_batchOnHand">The on-hand batch row to create a quality order for.</param>
+    private void createQualityOrder(TxBaja_TmpPeriodicBatchOnHand _batchOnHand)
+    {
+        TxBaja_PeriodicQualityGroup periodicQualityGroup = TxBaja_PeriodicQualityGroup::Find(_batchOnHand.PeriodicCode);
+        InventQualityOrderTable     qualityOrderTable;
+        NumberSeq                   NumSeq;
+        InventDim                   inventDim = InventDim::find(_batchOnHand.InventDimId);
+
+        NumSeq                              = NumberSeq::newGetNum(InventParameters::numRefQualityOrderId());
+        NumSeq.used();
+        qualityOrderTable.initValue();
+        qualityOrderTable.QualityOrderId    = NumSeq.num();
+        qualityOrderTable.ItemId            = _batchOnHand.ItemId;
+        qualityOrderTable.ItemName          = InventTable::find(_batchOnHand.ItemId).defaultProductName();
+        qualityOrderTable.ReferenceType     = InventTestReferenceType::Inventory;    
+        qualityOrderTable.TestGroupId       = periodicQualityGroup.TestGroupId;
+        qualityOrderTable.Qty               = _batchOnHand.AvailPhysical;
+
+        qualityOrderTable.insertFromForm(inventDim);
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>doesQualityOrderExistInSpecificStatus</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name = "_batchOnHand"></param>
+    /// <param name = "_status"></param>
+    /// <returns></returns>
+    private boolean doesQualityOrderExistInSpecificStatus(TxBaja_TmpPeriodicBatchOnHand _batchOnHand , InventTestOrderStatus _status = InventTestOrderStatus::Open)
+    {
+        TxBaja_PeriodicQualityGroup periodicQualityGroup = TxBaja_PeriodicQualityGroup::Find(_batchOnHand.PeriodicCode);
+        InventQualityOrderTable     qualityOrderTable;
+        InventDim                   inventDim = InventDim::find(_batchOnHand.InventDimId);
+
+        select count(RecId) from qualityOrderTable
+            where qualityOrderTable.ItemId == _batchOnHand.ItemId
+                && qualityOrderTable.InventDimId == _batchOnHand.InventDimId
+                && qualityOrderTable.TestGroupId == periodicQualityGroup.TestGroupId
+                && qualityOrderTable.ReferenceType == InventTestReferenceType::Inventory
+                && qualityOrderTable.OrderStatus    == _status;
+
+
+        return qualityOrderTable.RecId > 0;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

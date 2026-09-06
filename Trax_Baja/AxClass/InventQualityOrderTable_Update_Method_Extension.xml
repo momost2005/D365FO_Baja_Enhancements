@@ -44,11 +44,10 @@ final class InventQualityOrderTable_Update_Method_Extension
                     _inventDim  =   InventDim::find(this.InventDimId);
                     if(_inventDim.InventBatchId)
                     {
-                        _inventBatch = InventBatch::find(_inventDim.InventBatchId,this.ItemId);
+                        _inventBatch = InventBatch::find(_inventDim.InventBatchId,this.ItemId,true);
                         if(_inventBatch && _inventBatch.ReleaseDateTime != utcDateTimeNull())
                         {
                             ttsbegin;
-                            _inventBatch.selectForUpdate(true);
                             _inventBatch.ReleaseDateTime = DateTimeUtil::getSystemDateTime();
                             _inventBatch.doUpdate();
                             ttscommit;

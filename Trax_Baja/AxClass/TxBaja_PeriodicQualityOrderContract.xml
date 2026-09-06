@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>TxBaja_PeriodicQualityOrderContract</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+/// <summary>
+/// Data contract for <c>TxBaja_PeriodicQualityOrderService::createPeriodicQualityOrders</c>.
+/// Both filters are optional - when left empty, all on-hand batches due for a periodic
+/// quality check are processed.
+/// </summary>
+[DataContractAttribute]
+public class TxBaja_PeriodicQualityOrderContract
+{
+    /*
+    List itemIds;
+    List inventBatchIds;
+    /// <summary>
+    /// Optional list of items to limit the run to. Leave empty to process all items.
+    /// </summary>
+    /// <param name="_itemIds">The list of item IDs.</param>
+    /// <returns>The list of item IDs.</returns>
+    [DataMemberAttribute('ItemIds'),
+     AifCollectionTypeAttribute('return', Types::String),
+     SysOperationLabelAttribute(literalStr("Items")),
+     SysOperationHelpTextAttribute(literalStr("@Trax_BajaLabel:TxBaja_0013"))]
+    public List parmItemIds(List _itemIds = itemIds)
+    {
+        itemIds = _itemIds;
+        return itemIds;
+    }
+
+    /// <summary>
+    /// Optional list of item batches to limit the run to. Leave empty to process all batches.
+    /// </summary>
+    /// <param name="_inventBatchIds">The list of item batch IDs.</param>
+    /// <returns>The list of item batch IDs.</returns>
+    [DataMemberAttribute('InventBatchIds'),
+     AifCollectionTypeAttribute('return', Types::String),
+     SysOperationLabelAttribute(literalStr("Item batches")),
+     SysOperationHelpTextAttribute(literalStr("@Trax_BajaLabel:TxBaja_0014"))]
+    public List parmInventBatchIds(List _inventBatchIds = inventBatchIds)
+    {
+        inventBatchIds = _inventBatchIds;
+        return inventBatchIds;
+    }
+
+    /// <summary>
+    /// Indicates whether an item filter has been specified.
+    /// </summary>
+    /// <returns>true if one or more items were specified; otherwise, false.</returns>
+    public boolean hasItemIdFilter()
+    {
+        return itemIds && itemIds.elements() > 0;
+    }
+
+    /// <summary>
+    /// Indicates whether an item batch filter has been specified.
+    /// </summary>
+    /// <returns>true if one or more item batches were specified; otherwise, false.</returns>
+    public boolean hasInventBatchIdFilter()
+    {
+        return inventBatchIds && inventBatchIds.elements() > 0;
+    }
+
+    /// <summary>
+    /// Determines whether the specified item satisfies the item filter.
+    /// </summary>
+    /// <param name="_itemId">The item to check.</param>
+    /// <returns>true if the item filter is empty, or if <c>_itemId</c> is one of the specified items.</returns>
+    public boolean itemIdMatches(ItemId _itemId)
+    {
+        ListEnumerator enumerator;
+
+        if (!this.hasItemIdFilter())
+        {
+            return true;
+        }
+
+        enumerator = itemIds.getEnumerator();
+        while (enumerator.moveNext())
+        {
+            if (enumerator.current() == _itemId)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// Determines whether the specified item batch satisfies the item batch filter.
+    /// </summary>
+    /// <param name="_inventBatchId">The item batch to check.</param>
+    /// <returns>true if the item batch filter is empty, or if <c>_inventBatchId</c> is one of the specified batches.</returns>
+    public boolean inventBatchIdMatches(InventBatchId _inventBatchId)
+    {
+        ListEnumerator enumerator;
+
+        if (!this.hasInventBatchIdFilter())
+        {
+            return true;
+        }
+
+        enumerator = inventBatchIds.getEnumerator();
+        while (enumerator.moveNext())
+        {
+            if (enumerator.current() == _inventBatchId)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    */
+
+}
+]]></Declaration>
+		<Methods />
+	</SourceCode>
+</AxClass>
